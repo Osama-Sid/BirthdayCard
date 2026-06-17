@@ -888,7 +888,7 @@ that I got this chapter with you.
         } else {
 
             vaultMessage.innerHTML =
-                "❌ Hint: It starts with O.";
+                "❌ Hint: It starts with O and ends with u.";
         }
 
     });
