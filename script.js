@@ -4,25 +4,26 @@
 ===================================== */
 
 const sectionCompletion = {
-    0: { completed: true },  // Hero - always complete
-    1: { completed: false }, // Birthday Verification
-    2: { completed: false }, // Upgrade Machine
-    3: { completed: false }, // Gift Boxes
-    4: { completed: false }, // Quiz
-    5: { completed: false }, // Statistics
-    6: { completed: false }, // Operation Biryani
-    7: { completed: false }, // Operation Biryani Question
-    8: { completed: false }, // Scoreboard
-    9: { completed: false }, // Ossu Museum
-    10: { completed: false }, // Ossu Museum Question
-    11: { completed: false }, // Evidence Locker
-    12: { completed: false }, // Evidence Locker Question
-    13: { completed: false }, // Fortune Machine
-    14: { completed: false }, // Cake Challenge
-    15: { completed: false }, // Secret Vault
-    16: { completed: false }, // Secret Vault Question
-    17: { completed: false }, // One Wish
-    18: { completed: true }   // Final Letter - always complete
+    0: { completed: false }, // Mood Selection
+    1: { completed: true },  // Hero - always complete
+    2: { completed: false }, // Birthday Verification
+    3: { completed: false }, // Birthday Simulator
+    4: { completed: false }, // Birthday Surprise Boxes
+    5: { completed: false }, // Quiz
+    6: { completed: false }, // Statistics
+    7: { completed: false }, // Hall of Fame Memory
+    8: { completed: false }, // Hall of Fame Question
+    9: { completed: false }, // Scoreboard
+    10: { completed: false }, // Ossu Museum
+    11: { completed: false }, // Ossu Museum Question
+    12: { completed: false }, // Evidence Locker
+    13: { completed: false }, // Evidence Locker Question
+    14: { completed: false }, // Fortune Machine
+    15: { completed: false }, // Cake Challenge
+    16: { completed: false }, // Secret Vault
+    17: { completed: false }, // Secret Vault Question
+    18: { completed: false }, // One Wish
+    19: { completed: true }   // Final Letter - always complete
 };
 
 const teddyMessages = [
@@ -35,6 +36,60 @@ const teddyMessages = [
     "🤨 Nice try, but nope!",
     "✨ Just one more interaction, please!"
 ];
+
+/* =====================================
+   MUSIC MANAGER
+===================================== */
+
+const bgMusic = document.getElementById("bgMusic");
+
+// Map moods to music tracks
+const musicTracks = {
+    sunshine: "music/track1.mp3",
+    memory: "music/track2.mp3",
+    soft: "music/track3.mp3",
+    silent: null
+};
+
+function playMusic(mood) {
+    if (!bgMusic) {
+        console.error("Music element not found");
+        return;
+    }
+
+    console.log("Music element:", bgMusic);
+    console.log("Selected mood:", mood);
+
+    // Handle silent mode
+    if (mood === "silent" || !musicTracks[mood]) {
+        console.log("Silent mode enabled");
+        bgMusic.pause();
+        bgMusic.src = "";
+        return;
+    }
+
+    const trackPath = musicTracks[mood];
+    console.log("Attempting playback of:", trackPath);
+
+    bgMusic.pause();
+    bgMusic.src = trackPath;
+    bgMusic.load();
+
+    // Play with error handling
+    bgMusic.play()
+        .then(() => {
+            console.log("Music playback started:", mood);
+        })
+        .catch(error => {
+            console.error("Music playback failed:", error);
+        });
+}
+
+function stopMusic() {
+    if (!bgMusic) return;
+    bgMusic.pause();
+    bgMusic.src = "";
+}
 
 /* =====================================
    SCREEN NAVIGATION
@@ -81,6 +136,11 @@ function showScreen(index) {
     
     // Update button state
     updateContinueButtonState(index);
+    
+    // Auto-complete screens with no required interactions
+    if (index === 7 || index === 9 || index === 10 || index === 12 ) { // Hall of Fame & Scoreboard & Ossu Museum & Evidence Locker - display only
+        markSectionComplete(index);
+    }
     
     // Hide teddy message on screen change
     hideTeddyMessage();
@@ -248,6 +308,80 @@ function createPetal() {
 setInterval(createPetal, 350);
 
 /* =====================================
+   MOOD SELECTION
+===================================== */
+
+const moodCards = document.querySelectorAll(".mood-option-card");
+const moodResult = document.getElementById("mood-selection-result");
+const musicControl = document.getElementById("floating-music-control");
+const musicButton = document.getElementById("music-button");
+const musicPopup = document.getElementById("music-popup");
+const musicOptions = document.querySelectorAll(".music-option");
+let currentMood = null;
+
+moodCards.forEach(card => {
+    card.addEventListener("click", () => {
+        // Remove previous selection
+        moodCards.forEach(c => c.classList.remove("selected"));
+        
+        // Mark current as selected
+        card.classList.add("selected");
+        currentMood = card.dataset.mood;
+        
+        // Display result
+        moodResult.innerHTML = "🎵 Mood Selected ✨";
+        
+        // Play music for selected mood
+        playMusic(currentMood);
+        
+        // Mark as complete
+        markSectionComplete(0);
+        
+        // Show floating music control
+        musicControl.classList.remove("music-control-hidden");
+        musicControl.classList.add("music-control-visible");
+        
+        // Update active music option in popup
+        updateMusicPopupState();
+    });
+});
+
+// Music button functionality
+musicButton.addEventListener("click", (e) => {
+    e.stopPropagation();
+    musicPopup.classList.toggle("visible");
+});
+
+// Music option selection
+musicOptions.forEach(option => {
+    option.addEventListener("click", () => {
+        currentMood = option.dataset.mood;
+        updateMusicPopupState();
+        
+        // Play music for selected mood
+        playMusic(currentMood);
+        
+        // Update selected card
+        moodCards.forEach(card => {
+            card.classList.toggle("selected", card.dataset.mood === currentMood);
+        });
+    });
+});
+
+// Close popup when clicking outside
+document.addEventListener("click", (e) => {
+    if (!e.target.closest("#floating-music-control")) {
+        musicPopup.classList.remove("visible");
+    }
+});
+
+function updateMusicPopupState() {
+    musicOptions.forEach(option => {
+        option.classList.toggle("active", option.dataset.mood === currentMood);
+    });
+}
+
+/* =====================================
    BIRTHDAY VERIFICATION
 ===================================== */
 
@@ -281,69 +415,36 @@ verifyButtons.forEach(btn => {
             ];
         
         // Mark as complete
-        markSectionComplete(1);
+        markSectionComplete(2);
     });
 
 });
 
 /* =====================================
-   UPGRADE MACHINE
+   BIRTHDAY SIMULATOR
 ===================================== */
 
-const upgradeBtn =
-    document.getElementById("upgradeBtn");
+const simOptions = document.querySelectorAll(".sim-option");
+const simulatorResult = document.getElementById("simulatorResult");
 
-const upgradeOutput =
-    document.getElementById("upgradeOutput");
-
-if (upgradeBtn) {
-
-    upgradeBtn.addEventListener("click", () => {
-
-        const updates = [
-
-            "+10 Happiness",
-
-            "+25 Good Luck",
-
-            "+50 Great Memories",
-
-            "+100 Smiles",
-
-            "+∞ Birthday Energy",
-
-            "Upgrade Complete ✅"
-        ];
-
-        upgradeOutput.innerHTML = "";
-
-        let i = 0;
-
-        const interval = setInterval(() => {
-
-            if (i >= updates.length) {
-
-                clearInterval(interval);
-                
-                // Mark as complete after sequence finishes
-                markSectionComplete(2);
-
-                return;
-            }
-
-            const line =
-                document.createElement("p");
-
-            line.textContent =
-                updates[i];
-
-            upgradeOutput.appendChild(line);
-
-            i++;
-
-        }, 700);
+simOptions.forEach(btn => {
+    btn.addEventListener("click", () => {
+        const answer = btn.dataset.answer;
+        
+        if (answer === "d") {
+            simulatorResult.innerHTML = `
+                <p><strong>AI Analysis Complete</strong></p>
+                <p>Food Detected: 100%</p>
+                <p>Makeup Detected: 100%</p>
+                <p><strong>Result:</strong></p>
+                <p>This is definitely Juvi. ✓</p>
+            `;
+            markSectionComplete(3);
+        } else {
+            simulatorResult.innerHTML = "<p>❌ Hmm, not quite. Try again!</p>";
+        }
     });
-}
+});
 
 /* =====================================
    GIFT BOXES
@@ -365,7 +466,7 @@ giftBoxes.forEach(box => {
             "</b>";
         
         // Mark as complete when any gift is opened
-        markSectionComplete(3);
+        markSectionComplete(4);
     });
 
 });
@@ -398,7 +499,7 @@ quizButtons.forEach(btn => {
         }
         
         // Mark as complete when quiz is answered
-        markSectionComplete(4);
+        markSectionComplete(5);
     });
 
 });
@@ -408,11 +509,11 @@ quizButtons.forEach(btn => {
 ===================================== */
 
 function animateStatsIfVisible(screenIndex) {
-    // Screen 5 is stats (0-indexed)
-    if (screenIndex === 5) {
+    // Screen 6 is stats (0-indexed)
+    if (screenIndex === 6) {
         animateStatsBars();
         // Stats are auto-completed when visible
-        markSectionComplete(5);
+        markSectionComplete(6);
     }
 }
 
@@ -462,31 +563,101 @@ const questionBtns = document.querySelectorAll(".question-btn");
 
 questionBtns.forEach(btn => {
     btn.addEventListener("click", function() {
-        if (this.classList.contains("answered")) return;
-        
-        // Mark as answered
-        this.classList.add("answered");
-        
-        // Find the feedback div in the same screen
         const screen = this.closest(".screen");
-        const feedback = screen.querySelector(".question-feedback");
-        const continueBtn = screen.querySelector(".next-btn");
-        
-        // Show positive feedback
-        feedback.innerHTML = "✅ Great choice! Now you can continue.";
-        
-        // Get screen index
         const screenIndex = Array.from(screens).indexOf(screen);
         
-        // Mark section as complete
-        markSectionComplete(screenIndex);
+        // Check if already answered correctly
+        if (screen.classList.contains("question-answered")) return;
         
-        // Disable other buttons in this section
-        const otherBtns = screen.querySelectorAll(".question-btn");
-        otherBtns.forEach(btn => {
-            btn.disabled = true;
-            btn.style.opacity = "0.6";
-        });
+        const answerDisplay = screen.querySelector(".answer-display") || screen.querySelector(".question-feedback");
+        let isCorrect = false;
+        
+        // Determine which question based on available buttons
+        const hasJuviBtn = screen.querySelector(".juvi-btn");
+        const hasYesBtn = screen.querySelector(".yes-btn");
+        const hasForeverBtn = screen.querySelector(".forever-btn");
+        const hasDependsBtn = screen.querySelector(".depends-btn");
+        
+        // Hall of Fame Memory Question (screen 7)
+        if (hasJuviBtn && !hasDependsBtn) {
+            if (this.classList.contains("juvi-btn")) {
+                answerDisplay.innerHTML = "✅ Correct! According to Juvi, she was definitely responsible.";
+                isCorrect = true;
+            } else {
+                answerDisplay.innerHTML = "❌ Wrong! According to Juvi, it was definitely her. Try again!";
+                return; // Allow retry on wrong answer
+            }
+        } 
+        
+        // Ossu Museum Question (screen 10)
+        else if (hasYesBtn && !hasForeverBtn && !hasDependsBtn) {
+            if (this.classList.contains("yes-btn") || this.classList.contains("no-btn")) {
+                answerDisplay.innerHTML = (this.classList.contains("yes-btn")) 
+                    ? "Museum Board Rejected Request. The artifact remains on display."
+                    : "Expected Response. The rose stays.";
+                isCorrect = true;
+            } else {
+                answerDisplay.innerHTML = "❌ Wrong choice. Try again!";
+                return;
+            }
+        }
+        
+        // Evidence Locker Question (screen 12)
+        else if (hasForeverBtn && !hasDependsBtn) {
+            if (this.classList.contains("forever-btn")) {
+                answerDisplay.innerHTML = "✅ Correct! Even the investigation team didn't expect this.";
+                isCorrect = true;
+            } else {
+                answerDisplay.innerHTML = "❌ Wrong! Underestimated Ossu's attachment levels. Try again!";
+                return; // Allow retry on wrong answer
+            }
+        }
+        
+        // Secret Vault Question (screen 16)
+        else if (hasDependsBtn) {
+            if (this.classList.contains("depends-btn")) {
+                answerDisplay.innerHTML = `<p><strong>✅ Correct.</strong></p>
+                    <p>After extensive investigation,<br/>the committee concluded that<br/>the answer depends entirely on<br/>who is telling the story.</p>`;
+                this.classList.add("correct-answer");
+                isCorrect = true;
+            } else {
+                answerDisplay.innerHTML = `<p><strong>❌ Interesting choice.</strong></p>
+                    <p>Please consult the other party<br/>for a completely different version<br/>of events.</p>`;
+                return; // Allow retry on wrong answer
+            }
+        }
+        
+        // Generic handler for other questions
+        else {
+            answerDisplay.innerHTML = "✅ Great choice! Now you can continue.";
+            isCorrect = true;
+        }
+        
+        // Only disable buttons and mark complete when correct answer is given
+        if (isCorrect) {
+            markSectionComplete(screenIndex);
+            screen.classList.add("question-answered");
+            
+            if (!this.classList.contains("correct-answer")) {
+                this.style.backgroundColor = "#90EE90";
+            }
+            
+            // Disable other buttons only after correct answer
+            const otherBtns = screen.querySelectorAll(".question-btn");
+            otherBtns.forEach(btn => {
+                btn.disabled = true;
+                if (btn !== this) {
+                    btn.style.opacity = "0.6";
+                }
+            });
+            
+            // Unlock Continue button with animation
+            const continueBtn = screen.querySelector(".next-btn");
+            if (continueBtn) {
+                continueBtn.disabled = false;
+                continueBtn.classList.add("unlocked");
+            }
+        }
     });
 });
 
@@ -523,11 +694,6 @@ if (replayBtn) {
             "Haan.
             Isiliye kabhi hame
             been bajaate huwe dekha hai?"
-            </p>
-            <p>
-            Updated Score:
-            Juvi 827
-            | Ossu 13
             </p>
         `;
     });
@@ -576,7 +742,7 @@ if (fortuneBtn) {
                 ];
             
             // Mark as complete
-            markSectionComplete(13);
+            markSectionComplete(14);
 
         }, 1200);
     });
@@ -622,7 +788,7 @@ candles.forEach(candle => {
             triggerConfetti();
             
             // Mark as complete
-            markSectionComplete(14);
+            markSectionComplete(15);
         }
 
     });
@@ -697,12 +863,18 @@ if (unlockButton) {
             const message = `
 ❤️
 
-No matter where life takes us,
+We may not end up
+where we once imagined.
 
-I'm grateful I met you.
+But if there's one thing
+I'll always be grateful for,
 
-And I'm grateful
-you're still part of my life.
+it's that our paths crossed.
+
+And no matter what the future holds,
+
+I'll always be happy
+that I got this chapter with you.
 
 ❤️
             `;
@@ -711,7 +883,7 @@ you're still part of my life.
             typewriterEffect(message, vaultMessage, 20);
             
             // Mark as complete
-            markSectionComplete(15);
+            markSectionComplete(16);
 
         } else {
 
@@ -758,25 +930,38 @@ if (wishBtn) {
     wishBtn.addEventListener("click", () => {
 
         const wish = `
-If I could wish
-just one thing for you,
+If I could make
+just one wish for you,
 
-I'd wish for a year
-where you smile more,
+it would be that Allah grants you
+happiness in this dunya
+and success in the akhirah.
 
-stress less,
+May He make your path easier,
 
-and get everything
-you've been working for.
+increase you in goodness,
 
-❤️
+help you overcome your shortcomings,
+
+accept your duas,
+
+protect you from what is not meant for you,
+
+and bless you with what is best for you.
+
+And whenever life becomes difficult,
+
+May He give you the strength,
+patience and peace to get through it.
+
+Ameen. ❤️
         `;
         
         wishText.innerHTML = "";
         typewriterEffect(wish, wishText, 30);
         
         // Mark as complete
-        markSectionComplete(17);
+        markSectionComplete(18);
     });
 
 }
@@ -800,389 +985,8 @@ if (finalLetterSection) {
     });
 }
 
-/* =====================================
-   INITIAL LOAD
-===================================== */
-
-console.log("Script loading...");
-    document.querySelectorAll(".quiz-btn");
-
-const quizResult =
-    document.querySelector(".quiz-result");
-
-quizButtons.forEach(btn => {
-
-    btn.addEventListener("click", () => {
-
-        if (
-            btn.classList.contains("correct")
-        ) {
-
-            quizResult.innerHTML =
-                "✅ Historical records confirm this actually happened.";
-
-        } else {
-
-            quizResult.innerHTML =
-                "❌ Nice try. Think more like Juvi.";
-        }
-
-    });
-
-});
-
-/* =====================================
-   ANIMATED STATS
-===================================== */
-
-function animateStatsIfVisible(screenIndex) {
-    // Screen 7 (index 6) is the stats screen (3 hero + 3 verify/upgrade/gifts + 1 quiz)
-    // Actually need to count properly - let me check
-    // 0: hero, 1: verify, 2: upgrade, 3: gifts, 4: quiz, 5: stats
-    
-    if (screenIndex === 5) {
-        animateStatsBars();
-    }
-}
-
-function animateStatsBars() {
-    const statsCards = document.querySelectorAll(".screen.active .stats-list p");
-    
-    if (statsCards.length === 0) {
-        // Convert existing stats to animated bars
-        const statsSection = document.querySelector(".screen.active .stats-list");
-        if (statsSection && statsSection.children.length > 0 && !statsSection.querySelector(".stat-bar")) {
-            const stats = [
-                { label: "Food Appreciation", value: 100 },
-                { label: "Makeup Interest", value: 100 },
-                { label: "Winning Arguments", value: 100 },
-                { label: "Business Ideas", value: 92 },
-                { label: "Vada Pav Profitability", value: 3 },
-                { label: "Birthday Girl Rating", value: 1000, max: 1000 }
-            ];
-            
-            statsSection.innerHTML = "";
-            
-            stats.forEach((stat, index) => {
-                const max = stat.max || 100;
-                const percent = (stat.value / max) * 100;
-                const bar = document.createElement("div");
-                bar.className = "stat-bar";
-                bar.innerHTML = `
-                    <div class="stat-label">
-                        <span>${stat.label}</span>
-                        <span>${stat.value}${stat.max ? '/' + max : '%'}</span>
-                    </div>
-                    <div class="stat-progress-bar">
-                        <div class="stat-progress-fill" style="--width: ${percent}%; animation-delay: ${index * 0.1}s;"></div>
-                    </div>
-                `;
-                statsSection.appendChild(bar);
-            });
-        }
-    }
-}
-
-/* =====================================
-   OSSU VS JUVI REPLAY
-===================================== */
-
-const replayBtn =
-    document.getElementById("showReplay");
-
-const replayContainer =
-    document.getElementById("replayContainer");
-
-if (replayBtn) {
-
-    replayBtn.addEventListener("click", () => {
-
-        replayContainer.innerHTML = `
-
-            <p><strong>Juvi:</strong></p>
-
-            <p>
-            "Ammijaan kehti hain
-            ki bhains ke aage
-            been bajaane ka
-            koi matlab nahi hota."
-            </p>
-
-            <br>
-
-            <p><strong>Ossu:</strong></p>
-
-            <p>
-            "Haan.
-            Isiliye kabhi hame
-            been bajaate huwe dekha hai?"
-            </p>
-            <p>
-            Updated Score:
-            Juvi 827
-            | Ossu 13
-            </p>
-        `;
-    });
-
-}
-
-/* =====================================
-   FORTUNE MACHINE - ENHANCED
-===================================== */
-
-const fortuneBtn =
-    document.getElementById("fortuneBtn");
-
-const fortuneResult =
-    document.getElementById("fortuneResult");
-
-const fortunes = [
-
-    "🔮 Juvi will receive too many compliments today.",
-
-    "🔮 Juvi will continue winning arguments with no evidence.",
-
-    "🔮 Someone thinks she's amazing. (Not very secretly.)",
-
-    "🔮 Ossu will still listen to her nonsense.",
-
-    "🔮 A mysterious Rasgulla may appear in your future."
-];
-
-if (fortuneBtn) {
-
-    fortuneBtn.addEventListener("click", () => {
-
-        fortuneResult.innerHTML =
-            "<div class='fortune-crystal-ball'>🔮</div>" +
-            "<p>Consulting birthday universe...</p>";
-
-        setTimeout(() => {
-
-            fortuneResult.innerHTML =
-                fortunes[
-                    Math.floor(
-                        Math.random()
-                        * fortunes.length
-                    )
-                ];
-
-        }, 1200);
-    });
-
-}
-
-/* =====================================
-   CAKE CHALLENGE - ENHANCED
-===================================== */
-
-const candles =
-    document.querySelectorAll(".candle");
-
-const cakeMessage =
-    document.getElementById("cakeMessage");
-
-let blownCount = 0;
-
-candles.forEach(candle => {
-
-    candle.addEventListener("click", () => {
-
-        if (
-            candle.classList.contains("blown")
-        ) {
-            return;
-        }
-
-        candle.classList.add("blown");
-
-        candle.textContent = "✨";
-
-        blownCount++;
-
-        if (
-            blownCount === candles.length
-        ) {
-
-            cakeMessage.innerHTML =
-                "🎉 Wish Successfully Registered ✨";
-            
-            // Trigger confetti
-            triggerConfetti();
-        }
-
-    });
-
-});
-
-/* =====================================
-   CONFETTI ANIMATION
-===================================== */
-
-function triggerConfetti() {
-    for (let i = 0; i < 60; i++) {
-        setTimeout(() => {
-            createConfetti();
-        }, i * 30);
-    }
-}
-
-function createConfetti() {
-    const confetti = document.createElement("div");
-    confetti.classList.add("confetti");
-    
-    const colors = [
-        "#ff69b4", "#ba55d3", "#ffd700", 
-        "#ffb6c1", "#dda0dd", "#ffdab9",
-        "#add8e6", "#ffc0cb"
-    ];
-    
-    const size = 8 + Math.random() * 6;
-    confetti.style.width = size + "px";
-    confetti.style.height = size + "px";
-    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-    confetti.style.left = Math.random() * 100 + "vw";
-    confetti.style.top = "-10px";
-    
-    const duration = 2 + Math.random() * 1;
-    confetti.style.animation = `confettiFall ${duration}s linear forwards`;
-    
-    document.body.appendChild(confetti);
-    
-    setTimeout(() => {
-        confetti.remove();
-    }, duration * 1000);
-}
-
-/* =====================================
-   SECRET VAULT - ENHANCED WITH TYPEWRITER
-===================================== */
-
-const unlockButton =
-    document.getElementById("unlockVault");
-
-const vaultPassword =
-    document.getElementById("vaultPassword");
-
-const vaultMessage =
-    document.getElementById("vaultMessage");
-
-if (unlockButton) {
-
-    unlockButton.addEventListener("click", () => {
-
-        const password =
-            vaultPassword.value
-                .trim()
-                .toLowerCase();
-
-        if (
-            password === "ossu"
-        ) {
-
-            const message = `
-❤️
-
-No matter where life takes us,
-
-I'm grateful I met you.
-
-And I'm grateful
-you're still part of my life.
-
-❤️
-            `;
-            
-            vaultMessage.innerHTML = "";
-            typewriterEffect(message, vaultMessage, 20);
-
-        } else {
-
-            vaultMessage.innerHTML =
-                "❌ Hint: It starts with O.";
-        }
-
-    });
-
-}
-
-function typewriterEffect(text, element, speed = 50) {
-    let charIndex = 0;
-    element.innerHTML = "";
-    
-    function type() {
-        if (charIndex < text.length) {
-            const char = text.charAt(charIndex);
-            if (char === "\n") {
-                element.innerHTML += "<br>";
-            } else {
-                element.innerHTML += char;
-            }
-            charIndex++;
-            setTimeout(type, speed);
-        }
-    }
-    
-    type();
-}
-
-/* =====================================
-   ONE WISH FOR JUVI
-===================================== */
-
-const wishBtn =
-    document.getElementById("showWish");
-
-const wishText =
-    document.getElementById("wishText");
-
-if (wishBtn) {
-
-    wishBtn.addEventListener("click", () => {
-
-        const wish = `
-If I could wish
-just one thing for you,
-
-I'd wish for a year
-where you smile more,
-
-stress less,
-
-and get everything
-you've been working for.
-
-❤️
-        `;
-        
-        wishText.innerHTML = "";
-        typewriterEffect(wish, wishText, 30);
-    });
-
-}
-
-/* =====================================
-   FINAL LETTER - CONFETTI TRIGGER
-===================================== */
-
-const finalLetterSection = document.querySelector(".final-letter");
-if (finalLetterSection) {
-    // Trigger confetti when final letter becomes visible
-    const originalShowScreen = showScreen;
-    
-    // Check on screen change
-    nextButtons.forEach(btn => {
-        btn.addEventListener("click", () => {
-            // Check if we're about to show the final letter (last screen)
-            if (currentScreen === screens.length - 1) {
-                setTimeout(() => {
-                    triggerConfetti();
-                }, 500);
-            }
-        });
-    });
-}
+// Show the first screen
+showScreen(0);
 
 /* =====================================
    INITIAL LOAD

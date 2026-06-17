@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Birthday Juvi ❤️</title>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
     <!-- Progress Indicator -->
@@ -26,8 +29,60 @@
         <div class="teddy-message"></div>
     </div>
 
+    <!-- Floating Music Control -->
+    <div id="floating-music-control" class="music-control-hidden">
+        <button id="music-button" class="music-button">🎵</button>
+        <div id="music-popup" class="music-popup">
+            <h3>Mood Selection</h3>
+            <div class="music-options">
+                <button class="music-option" data-mood="sunshine">🌸 Soft Hearts</button>
+                <button class="music-option" data-mood="memory">✨ Memory Lane</button>
+                <button class="music-option" data-mood="soft">☀️ Sunshine Mode</button>
+                <button class="music-option" data-mood="silent">🔇 Silent Mode</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mood Selection Screen -->
+    <section class="screen mood-selection-screen active">
+        <div class="glass-card mood-card">
+            <h1>🎵 Before We Begin...</h1>
+            <p class="mood-subtitle">Choose the mood for today's journey.</p>
+
+            <div class="mood-grid">
+                <button class="mood-option-card" data-mood="sunshine">
+                    <div class="mood-icon">🌸</div>
+                    <h3>Soft Hearts</h3>
+                    <p>For smiles, laughter and happy memories.</p>
+                </button>
+
+                <button class="mood-option-card" data-mood="memory">
+                    <div class="mood-icon">✨</div>
+                    <h3>Memory Lane</h3>
+                    <p>For nostalgia, stories and treasured moments.</p>
+                </button>
+
+                <button class="mood-option-card" data-mood="soft">
+                    <div class="mood-icon">☀️</div>
+                    <h3>Sunshine mode</h3>
+                    <p>For warm thoughts and quiet emotions.</p>
+                </button>
+
+                <button class="mood-option-card" data-mood="silent">
+                    <div class="mood-icon">🔇</div>
+                    <h3>Silent Mode</h3>
+                    <p>If you prefer to sing the song yourself, and enjoy soundtrack in your head.</p>
+                </button>
+            </div>
+
+            <div id="mood-selection-result"></div>
+
+            <button class="next-btn" disabled>🎂 Begin The Journey</button>
+        </div>
+    </section>
+
     <!-- Hero Section -->
-    <section class="screen hero-section active">
+    <section class="screen hero-section">
         <div class="glass-card hero-card">
             <img src="images/juveria1.jpg" alt="Juvi" class="hero-image">
 
@@ -36,7 +91,7 @@
             <div class="intro-text">
                 <p>To: Juvi</p>
                 <p>On the occasion of:</p>
-                <p>Another successful trip around the Sun ☀️</p>
+                <p>A Day Worth Celebrating ✨</p>
                 <br>
                 <p>From: Ossu</p>
             </div>
@@ -62,6 +117,7 @@
     <section class="screen">
         <div class="glass-card">
             <h2>🎂 Birthday Verification</h2>
+            <p class="section-subtitle">Confirming one of the most important facts in history.</p>
 
             <p>Please verify that today is your birthday.</p>
 
@@ -74,37 +130,48 @@
 
             <div id="verification-result"></div>
 
-            <button class="next-btn">Continue</button>
+            <button class="next-btn">✅ Identity Confirmed</button>
         </div>
     </section>
 
-    <!-- Birthday Upgrade Machine -->
+    <!-- Birthday Simulator -->
     <section class="screen">
         <div class="glass-card">
-            <h2>✨ Birthday Upgrade Machine</h2>
+            <h2>🪄 Birthday Simulator</h2>
+            <p class="section-subtitle">Analyzing the perfect Juvi birthday in laboratory conditions.</p>
 
-            <button id="upgradeBtn">Install Birthday Updates</button>
+            <p>Choose Juvi's ideal birthday plan:</p>
 
-            <div id="upgradeOutput"></div>
+            <div class="simulator-options">
+                <button class="sim-option" data-answer="a">A. Read a book peacefully</button>
+                <button class="sim-option" data-answer="b">B. Eat good food</button>
+                <button class="sim-option" data-answer="c">C. Buy makeup</button>
+                <button class="sim-option" data-answer="d">D. Both B and C</button>
+            </div>
 
-            <button class="next-btn">Continue</button>
+            <div id="simulatorResult"></div>
+
+            <button class="next-btn">🪄 Continue Investigation</button>
         </div>
     </section>
 
-    <!-- Gift Boxes -->
+    <!-- Birthday Surprise Boxes -->
     <section class="screen">
         <div class="glass-card">
-            <h2>🎁 Choose Your Birthday Gift</h2>
+            <h2>🎁 Birthday Surprise Boxes</h2>
+            <p class="section-subtitle">Hidden treasures from the heart.</p>
+
+            <p>Open all three boxes to see what's inside:</p>
 
             <div class="gift-container">
-                <div class="gift-box" data-gift="Unlimited Happiness">🎁</div>
-                <div class="gift-box" data-gift="Unlimited Rasgulla">🎁</div>
-                <div class="gift-box" data-gift="Lifetime Supply Of Makeup">🎁</div>
+                <div class="gift-box" data-gift="Unlimited Rasgulla Supply">🎁</div>
+                <div class="gift-box" data-gift="One Free Argument Victory Coupon">🎁</div>
+                <div class="gift-box" data-gift="Lifetime VIP Access To Ossu's Nonsense">🎁</div>
             </div>
 
             <div id="giftResult"></div>
 
-            <button class="next-btn">Continue</button>
+            <button class="next-btn">🎁 Open Next Gift</button>
         </div>
     </section>
 
@@ -112,6 +179,7 @@
     <section class="screen">
         <div class="glass-card">
             <h2>🤭 How Well Do You Know Yourself?</h2>
+            <p class="section-subtitle">A scientifically rigorous test.</p>
 
             <div class="quiz-card">
 
@@ -138,7 +206,7 @@
                 <div class="quiz-result"></div>
             </div>
 
-            <button class="next-btn">Continue</button>
+            <button class="next-btn">📚 Next Question</button>
         </div>
     </section>
 
@@ -146,74 +214,93 @@
     <section class="screen">
         <div class="glass-card">
 
-            <img src="images/juveria2.jpg"
-                 alt="Juvi"
-                 class="section-image">
+            <img src="images/juveria2.jpg" alt="Juvi" class="section-image">
 
             <h2>📊 Juvi Statistics</h2>
+            <p class="section-subtitle">Compiled after years of observation and highly questionable research.</p>
 
             <div class="stats-list">
-                <p>Food Appreciation: 100%</p>
-                <p>Makeup Interest: 100%</p>
-                <p>Winning Arguments: 100%</p>
-                <p>Business Ideas: 92%</p>
-                <p>Vada Pav Profitability: 3%</p>
-                <p>Birthday Girl Rating: 1000%</p>
+
+                <p>🍕 Food Enthusiasm: 100%</p>
+
+                <p>💄 Makeup Interest: 100%</p>
+
+                <p>🏆 Confidence In Winning Arguments: 100%</p>
+
+                <p>🍬 Probability Of Thinking About Food: 97%</p>
+
+                <p>💡 Random Business Ideas: 92%</p>
+
+                <p>🌭 Vada Pav Startup Success Rate: Under Investigation</p>
+
+                <p>😌 Confidence While Being Wrong: Surprisingly High</p>
+
+                <p>👑 Birthday Girl Rating: 1000%</p>
+
             </div>
 
-            <button class="next-btn">Continue</button>
+            <button class="next-btn">📊 View Research Findings</button>
+
         </div>
     </section>
 
-    <!-- Operation Biryani -->
+
+    <!-- Hall of Fame Memory #001 -->
     <section class="screen">
         <div class="glass-card">
 
-            <h2>🍲 Operation Biryani</h2>
+            <h2>🍲 Hall Of Fame Memory #001</h2>
+            <p class="memory-subtitle">The Great Biryani Incident</p>
 
-            <p>One day, Juvi somehow convinced Ossu that cooking biryani was easy.</p>
+            <p>One day, for reasons still unknown, Juvi convinced Ossu that cooking biryani was easy.</p>
 
-            <div class="biryani-card">
-                <p>Cooking Experience: 0</p>
-                <p>Confidence: 100</p>
-                <p>Chef In Charge: Juvi</p>
-                <p>Scoldings Received: Classified</p>
-                <p>Kitchen Survival Rate: 100%</p>
+            <p>Despite having almost zero cooking experience, Ossu somehow agreed.</p>
+
+            <p>What followed was:</p>
+
+            <div class="memory-list">
+                <p>📞 A very long call</p>
+                <p>🍚 Questionable cooking decisions</p>
+                <p>😤 Multiple scoldings from Juvi</p>
+                <p>🤦 Several near-disasters</p>
+                <p>🎉 One successful biryani</p>
             </div>
 
-            <div class="biryani-verdict">
-                <p>If biryani is good → Credit Juvi</p>
-                <p>If biryani is bad → Blame Ossu</p>
+            <div class="memory-conclusion">
+                <p><strong>Official Conclusion:</strong></p>
+                <p>If the biryani was good, Juvi deserves the credit.</p>
+                <p>If the biryani was bad, Ossu was clearly not following instructions.</p>
             </div>
 
-            <button class="next-btn">Continue</button>
+            <button class="next-btn">🍲 Continue Investigation</button>
         </div>
     </section>
 
-    <!-- Operation Biryani Question -->
+    <!-- Hall of Fame Memory Question -->
     <section class="screen">
         <div class="glass-card">
-            <h2>🍲 Operation Biryani - Question</h2>
+            <h2>🍲 Hall Of Fame - Question</h2>
+            <p class="section-subtitle">From the official investigation records.</p>
 
-            <p>Did Juvi actually do a good job cooking biryani?</p>
+            <p>According to Juvi, who was responsible for the successful biryani?</p>
 
             <div class="option-group">
-                <button class="question-btn" data-answer="yes">
-                    Yes, it was amazing!
+                <button class="question-btn ossu-btn">
+                    A. Ossu
                 </button>
 
-                <button class="question-btn" data-answer="no">
-                    Ossu had to fix it
+                <button class="question-btn juvi-btn">
+                    B. Juvi
                 </button>
 
-                <button class="question-btn" data-answer="maybe">
-                    It was... interesting
+                <button class="question-btn rice-btn">
+                    C. The Rice
                 </button>
             </div>
 
-            <div class="question-feedback"></div>
+            <div class="answer-display"></div>
 
-            <button class="next-btn" disabled>Continue</button>
+            <button class="next-btn" disabled>🍲 Continue Investigation</button>
         </div>
     </section>
 
@@ -221,40 +308,90 @@
     <section class="screen">
         <div class="glass-card">
 
-            <h2>🏆 Ossu vs Juvi Scoreboard</h2>
+            <h2>🏆 The Great Debate Championship</h2>
+            <p class="section-subtitle">Records maintained by a completely unbiased committee.</p>
 
-            <p>Juvi: 827</p>
-            <p>Ossu: 12</p>
+            <div class="stats-list">
+
+                <p>
+                    🥇 Most Common Winner:
+                    Juvi (99.9%)
+                </p>
+
+                <p>
+                    🥈 Most Common Loser:
+                    Ossu (99.9%)
+                </p>
+
+                <p>
+                    ⚖️ Most Common Judge:
+                    Juvi
+                </p>
+
+                <p>
+                    👀 Most Common Witness:
+                    Ossu
+                </p>
+
+                <p>
+                    📜 Most Common Evidence:
+                    "Ammijaan kehti hain..."
+                </p>
+
+                <p>
+                    🏆 Most Famous Match:
+                    The Bhains ke aage been bajana Incident
+                </p>
+
+                <p>
+                    📈 Accuracy Of Records:
+                    Supplied By Juvi
+                </p>
+
+                <p>
+                    🔄 Official Status:
+                    Competition Ongoing
+                </p>
+
+            </div>
 
             <button id="showReplay">
-                View Match Replay
+                View Legendary Match Replay
             </button>
 
             <div id="replayContainer"></div>
 
-            <button class="next-btn">Continue</button>
+            <button class="next-btn">
+                ⚖️ Review Next Case
+            </button>
+
         </div>
     </section>
+
 
     <!-- Ossu Museum -->
     <section class="screen">
         <div class="glass-card">
 
-            <img src="images/rose.jpg"
-                 class="section-image">
+            <img src="images/rose.jpg" class="section-image museum-artifact">
+
+            <div class="artifact-badge">📜 Historical Artifact</div>
 
             <h2>🌹 Ossu Museum</h2>
+            <p class="section-subtitle">Featuring artifacts nobody expected to survive.</p>
 
-            <p>Artifact #001</p>
-            <p>The First Rose</p>
+            <p><strong>Exhibit #001</strong></p>
+            <p><strong>The Rose That Refuses To Retire</strong></p>
 
-            <br>
-
-            <p>Current Condition: Mostly Retired</p>
+            <p>Presented to Juvi: 6 Months Ago</p>
+            <p>Current Condition: Somewhere between a flower and an ancient artifact.</p>
             <p>Physical Value: ₹0</p>
-            <p>Emotional Value: ∞</p>
+            <p>Emotional Value: Still Not Measured</p>
 
-            <button class="next-btn">Continue</button>
+            <p><strong>Museum Curator's Note:</strong></p>
+            <p>For reasons nobody understands, Ossu still has it.</p>
+
+            <button class="next-btn">🌹 View Next Exhibit</button>
         </div>
     </section>
 
@@ -262,26 +399,23 @@
     <section class="screen">
         <div class="glass-card">
             <h2>🌹 Ossu Museum - Question</h2>
+            <p class="section-subtitle">From the official exhibit records.</p>
 
-            <p>Why does Ossu keep the rose in the museum?</p>
+            <p>Should this artifact finally be retired from service?</p>
 
             <div class="option-group">
-                <button class="question-btn" data-answer="memory">
-                    It's too precious to lose
+                <button class="question-btn yes-btn">
+                    Yes
                 </button>
 
-                <button class="question-btn" data-answer="clutter">
-                    He's just a hoarder
-                </button>
-
-                <button class="question-btn" data-answer="both">
-                    Both, honestly
+                <button class="question-btn no-btn">
+                    No
                 </button>
             </div>
 
-            <div class="question-feedback"></div>
+            <div class="answer-display"></div>
 
-            <button class="next-btn" disabled>Continue</button>
+            <button class="next-btn" disabled>🌹 View Next Exhibit</button>
         </div>
     </section>
 
@@ -289,52 +423,85 @@
     <section class="screen">
         <div class="glass-card">
 
-            <img src="images/lips.jpg"
-                 class="section-image">
+            <img src="images/lips.jpg" class="section-image evidence-artifact">
+
+            <div class="evidence-tag">📎 Evidence File #002</div>
 
             <h2>💋 Evidence Locker</h2>
+            <p class="section-subtitle">Officially preserved for historical reasons.</p>
 
-            <p>Evidence #002</p>
-
-            <p>The Legendary Lipstick Mark</p>
+            <p class="evidence-label"><strong>File Name:</strong> The Legendary Lipstick Mark</p>
 
             <br>
 
-            <p>Reason For Preservation:</p>
-
             <p>
-                Ossu has never learned
-                how to throw things away.
+                Some memories are photographs.
             </p>
 
-            <button class="next-btn">Continue</button>
+            <p>
+                Some memories are conversations.
+            </p>
+
+            <p>
+                And some memories are random little things
+                that somehow become important.
+            </p>
+
+            <p>
+                This happens to be one of those things.
+            </p>
+
+            <br>
+
+            <p><strong>📋 Current Status:</strong></p>
+
+            <p>
+                Still Preserved
+            </p>
+
+            <br>
+
+            <p><strong>🔍 Reason For Preservation:</strong></p>
+
+            <p>
+                A memory attached to it.
+            </p>
+
+            <button class="next-btn">💋 Open Next File</button>
+
         </div>
     </section>
+
 
     <!-- Evidence Locker Question -->
     <section class="screen">
         <div class="glass-card">
             <h2>💋 Evidence Locker - Question</h2>
+            <p class="section-subtitle">Case analysis and emotional intelligence test.</p>
 
-            <p>Is it cute or creepy that Ossu kept the lipstick mark?</p>
+            <p>How long did you think Ossu would keep this?</p>
 
             <div class="option-group">
-                <button class="question-btn" data-answer="cute">
-                    Aww, that's so sweet
+                <button class="question-btn day-btn">
+                    1 Day
                 </button>
 
-                <button class="question-btn" data-answer="creepy">
-                    Definitely creepy
+                <button class="question-btn week-btn">
+                    1 Week
                 </button>
 
-                <button class="question-btn" data-answer="both">
-                    Cute-creepy combo
+                <button class="question-btn month-btn">
+                    1 Month
+                </button>
+
+                <button class="question-btn forever-btn">
+                    Still Keeping It
                 </button>
             </div>
 
-            <div class="question-feedback"></div>
+            <div class="answer-display"></div>
 
-            <button class="next-btn" disabled>Continue</button>
+            <button class="next-btn" disabled>💋 Open Next File</button>
         </div>
     </section>
 
@@ -342,18 +509,18 @@
     <section class="screen">
         <div class="glass-card">
 
-            <img src="images/juveria3.jpg"
-                 class="section-image">
+            <img src="images/juveria3.jpg" class="section-image">
 
             <h2>🔮 Birthday Fortune Machine</h2>
+            <p class="section-subtitle">Consulting the birthday universe for divine wisdom.</p>
 
-            <button id="fortuneBtn">
-                Reveal My Birthday Fortune
+            <button id="fortuneBtn" class="fortune-trigger">
+                🔮 Reveal My Birthday Fortune
             </button>
 
             <div id="fortuneResult"></div>
 
-            <button class="next-btn">Continue</button>
+            <button class="next-btn">🔮 Reveal Next Prediction</button>
         </div>
     </section>
 
@@ -362,6 +529,7 @@
         <div class="glass-card">
 
             <h2>🎂 Birthday Cake Challenge</h2>
+            <p class="section-subtitle">One moment to make a special wish.</p>
 
             <p>Tap all candles to blow them out.</p>
 
@@ -375,7 +543,7 @@
 
             <div id="cakeMessage"></div>
 
-            <button class="next-btn">Continue</button>
+            <button class="next-btn">🎂 Make A Wish</button>
         </div>
     </section>
 
@@ -383,8 +551,7 @@
     <section class="screen">
         <div class="glass-card secret-vault">
 
-            <img src="images/hands.jpg"
-                 class="vault-bg">
+            <img src="images/hands.jpg" class="vault-bg">
 
             <div class="vault-content">
 
@@ -392,10 +559,7 @@
 
                 <p>What does Juvi call Osama?</p>
 
-                <input
-                    type="text"
-                    id="vaultPassword"
-                    placeholder="Enter Password">
+                <input type="text" id="vaultPassword" placeholder="Enter Password">
 
                 <button id="unlockVault">
                     Unlock
@@ -411,28 +575,33 @@
 
     <!-- Secret Vault Question -->
     <section class="screen">
-        <div class="glass-card">
-            <h2>🔐 Secret Vault - Question</h2>
+        <div class="glass-card verification-card">
+            <h2>🔐 Secret Vault - Final Verification</h2>
+            <p class="section-subtitle">📜 Historical Records Database</p>
 
-            <p>What does Juvi call Ossu besides "Ossu"?</p>
+            <p class="verification-question">According to historical records, who usually thinks they're right?</p>
 
-            <div class="option-group">
-                <button class="question-btn" data-answer="a">
-                    A silly goose
+            <div class="option-group verification-options">
+                <button class="question-btn juvi-vault-btn">
+                    A. Juvi
                 </button>
 
-                <button class="question-btn" data-answer="b">
-                    The best listener
+                <button class="question-btn ossu-vault-btn">
+                    B. Ossu
                 </button>
 
-                <button class="question-btn" data-answer="c">
-                    All of the above
+                <button class="question-btn both-vault-btn">
+                    C. Both
+                </button>
+
+                <button class="question-btn depends-btn">
+                    D. Depends on who is telling the story
                 </button>
             </div>
 
-            <div class="question-feedback"></div>
+            <div class="question-feedback verification-feedback"></div>
 
-            <button class="next-btn" disabled>Continue</button>
+            <button class="next-btn" disabled>🔐 Access Granted</button>
         </div>
     </section>
 
@@ -451,7 +620,6 @@
             <button class="next-btn">Continue</button>
         </div>
     </section>
-
     <!-- Final Letter -->
     <section class="screen">
         <div class="glass-card final-letter">
@@ -460,50 +628,61 @@
 
             <p>
                 Life has a funny way
-                of taking people on paths
-                they never expected.
+                of bringing people into each other's lives
+                when they least expect it.
             </p>
 
             <p>
-                And if there's one thing
-                I'm thankful for,
+                And I'm genuinely grateful
+                for the conversations,
+                the laughter,
+                the memories,
+                and all the moments in between.
             </p>
 
             <p>
-                it's that our paths crossed.
+                As you begin another year,
             </p>
 
             <p>
-                Thank you for the memories.
+                I pray that Allah blesses you
+                with happiness,
+                peace,
+                good health,
+                barakah,
+                and success in both this dunya
+                and the akhirah.
             </p>
 
             <p>
-                Thank you for the laughs.
+                May He make your journey easier,
+                help you overcome your shortcomings,
+                strengthen you through difficult times,
+                and guide you towards
+                what is best for you.
+            </p>
+
+
+            <p>
+                May your duas be accepted,
+                your efforts rewarded,
+                and your heart always find peace
+                in His plans.
             </p>
 
             <p>
-                Thank you for staying.
-            </p>
-
-            <p>
-                I hope this year brings you:
-            </p>
-
-            <p>✨ Happiness</p>
-            <p>✨ Success</p>
-            <p>✨ Peace</p>
-            <p>✨ Good Health</p>
-
-            <p>
+                May this year bring you
+                new opportunities,
+                meaningful moments,
                 and countless reasons to smile.
             </p>
 
             <p>
-                You deserve all of it.
+                You deserve that.
             </p>
 
             <p>
-                Happy Birthday.
+                Happy Birthday, Juvi.
             </p>
 
             <p>❤️</p>
@@ -513,7 +692,14 @@
         </div>
     </section>
 
+
+    <!-- Background Music -->
+    <audio id="bgMusic" loop preload="auto">
+        Your browser does not support audio.
+    </audio>
+
     <script src="script.js"></script>
 
 </body>
+
 </html>
