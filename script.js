@@ -861,22 +861,20 @@ if (unlockButton) {
         ) {
 
             const message = `
-❤️
+🌸
 
-We may not end up
-where we once imagined.
-
-But if there's one thing
+Some chapters arrive unexpectedly,
+and somehow end up becoming
+the ones we remember the most.
+And if there's one thing
 I'll always be grateful for,
-
 it's that our paths crossed.
-
 And no matter what the future holds,
-
 I'll always be happy
 that I got this chapter with you.
 
-❤️
+
+🌸
             `;
             
             vaultMessage.innerHTML = "";
@@ -888,7 +886,7 @@ that I got this chapter with you.
         } else {
 
             vaultMessage.innerHTML =
-                "❌ Hint: It starts with O and ends with u.";
+                "❌ Hint: It starts with O.";
         }
 
     });
