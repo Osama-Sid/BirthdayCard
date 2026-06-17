@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Juvi ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Progress Indicator -->
+    <div id="progress-indicator">
+        <div class="progress-bar-container">
+            <div class="progress-bar-fill"></div>
+        </div>
+        <div class="progress-text">Step <span class="current-step">1</span> of <span class="total-steps">15</span></div>
+    </div>
+
+    <!-- Flower Petals Container -->
+    <div id="petals-container"></div>
+
+    <!-- Teddy Companion -->
+    <div id="teddy-companion">
+        <div class="teddy-body">🧸</div>
+        <div class="teddy-message"></div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="screen hero-section active">
+        <div class="glass-card hero-card">
+            <img src="images/juveria1.jpg" alt="Juvi" class="hero-image">
+
+            <h1>Happy Birthday Juvi ❤️</h1>
+
+            <div class="intro-text">
+                <p>To: Juvi</p>
+                <p>On the occasion of:</p>
+                <p>Another successful trip around the Sun ☀️</p>
+                <br>
+                <p>From: Ossu</p>
+            </div>
+
+            <div class="intro-checklist">
+                <p>Before you continue, please note that this website contains:</p>
+
+                <ul>
+                    <li>✓ Birthday Wishes</li>
+                    <li>✓ Historical Records</li>
+                    <li>✓ Questionable Research</li>
+                    <li>✓ Verified Juvi Facts</li>
+                    <li>✓ Mild Roasting</li>
+                    <li>✓ One Extremely Important Birthday Girl</li>
+                </ul>
+            </div>
+
+            <button class="next-btn">Begin Birthday Experience 🎂</button>
+        </div>
+    </section>
+
+    <!-- Birthday Verification -->
+    <section class="screen">
+        <div class="glass-card">
+            <h2>🎂 Birthday Verification</h2>
+
+            <p>Please verify that today is your birthday.</p>
+
+            <div class="option-group">
+                <button class="verify-btn">Yes</button>
+                <button class="verify-btn">Definitely Yes</button>
+                <button class="verify-btn">Obviously Yes</button>
+                <button class="verify-btn">I'm The Birthday Girl</button>
+            </div>
+
+            <div id="verification-result"></div>
+
+            <button class="next-btn">Continue</button>
+        </div>
+    </section>
+
+    <!-- Birthday Upgrade Machine -->
+    <section class="screen">
+        <div class="glass-card">
+            <h2>✨ Birthday Upgrade Machine</h2>
+
+            <button id="upgradeBtn">Install Birthday Updates</button>
+
+            <div id="upgradeOutput"></div>
+
+            <button class="next-btn">Continue</button>
+        </div>
+    </section>
+
+    <!-- Gift Boxes -->
+    <section class="screen">
+        <div class="glass-card">
+            <h2>🎁 Choose Your Birthday Gift</h2>
+
+            <div class="gift-container">
+                <div class="gift-box" data-gift="Unlimited Happiness">🎁</div>
+                <div class="gift-box" data-gift="Unlimited Rasgulla">🎁</div>
+                <div class="gift-box" data-gift="Lifetime Supply Of Makeup">🎁</div>
+            </div>
+
+            <div id="giftResult"></div>
+
+            <button class="next-btn">Continue</button>
+        </div>
+    </section>
+
+    <!-- Juvi Quiz -->
+    <section class="screen">
+        <div class="glass-card">
+            <h2>🤭 How Well Do You Know Yourself?</h2>
+
+            <div class="quiz-card">
+
+                <h3>Question 1</h3>
+
+                <p>Which of the following is the most Juviest thing ever?</p>
+
+                <button class="quiz-btn">
+                    Starting a company
+                </button>
+
+                <button class="quiz-btn">
+                    Writing a book
+                </button>
+
+                <button class="quiz-btn">
+                    Traveling the world
+                </button>
+
+                <button class="quiz-btn correct">
+                    Praying Tahajjud for Rasgulla
+                </button>
+
+                <div class="quiz-result"></div>
+            </div>
+
+            <button class="next-btn">Continue</button>
+        </div>
+    </section>
+
+    <!-- Juvi Statistics -->
+    <section class="screen">
+        <div class="glass-card">
+
+            <img src="images/juveria2.jpg"
+                 alt="Juvi"
+                 class="section-image">
+
+            <h2>📊 Juvi Statistics</h2>
+
+            <div class="stats-list">
+                <p>Food Appreciation: 100%</p>
+                <p>Makeup Interest: 100%</p>
+                <p>Winning Arguments: 100%</p>
+                <p>Business Ideas: 92%</p>
+                <p>Vada Pav Profitability: 3%</p>
+                <p>Birthday Girl Rating: 1000%</p>
+            </div>
+
+            <button class="next-btn">Continue</button>
+        </div>
+    </section>
+
+    <!-- Operation Biryani -->
+    <section class="screen">
+        <div class="glass-card">
+
+            <h2>🍲 Operation Biryani</h2>
+
+            <p>One day, Juvi somehow convinced Ossu that cooking biryani was easy.</p>
+
+            <div class="biryani-card">
+                <p>Cooking Experience: 0</p>
+                <p>Confidence: 100</p>
+                <p>Chef In Charge: Juvi</p>
+                <p>Scoldings Received: Classified</p>
+                <p>Kitchen Survival Rate: 100%</p>
+            </div>
+
+            <div class="biryani-verdict">
+                <p>If biryani is good → Credit Juvi</p>
+                <p>If biryani is bad → Blame Ossu</p>
+            </div>
+
+            <button class="next-btn">Continue</button>
+        </div>
+    </section>
+
+    <!-- Operation Biryani Question -->
+    <section class="screen">
+        <div class="glass-card">
+            <h2>🍲 Operation Biryani - Question</h2>
+
+            <p>Did Juvi actually do a good job cooking biryani?</p>
+
+            <div class="option-group">
+                <button class="question-btn" data-answer="yes">
+                    Yes, it was amazing!
+                </button>
+
+                <button class="question-btn" data-answer="no">
+                    Ossu had to fix it
+                </button>
+
+                <button class="question-btn" data-answer="maybe">
+                    It was... interesting
+                </button>
+            </div>
+
+            <div class="question-feedback"></div>
+
+            <button class="next-btn" disabled>Continue</button>
+        </div>
+    </section>
+
+    <!-- Scoreboard -->
+    <section class="screen">
+        <div class="glass-card">
+
+            <h2>🏆 Ossu vs Juvi Scoreboard</h2>
+
+            <p>Juvi: 827</p>
+            <p>Ossu: 12</p>
+
+            <button id="showReplay">
+                View Match Replay
+            </button>
+
+            <div id="replayContainer"></div>
+
+            <button class="next-btn">Continue</button>
+        </div>
+    </section>
+
+    <!-- Ossu Museum -->
+    <section class="screen">
+        <div class="glass-card">
+
+            <img src="images/rose.jpg"
+                 class="section-image">
+
+            <h2>🌹 Ossu Museum</h2>
+
+            <p>Artifact #001</p>
+            <p>The First Rose</p>
+
+            <br>
+
+            <p>Current Condition: Mostly Retired</p>
+            <p>Physical Value: ₹0</p>
+            <p>Emotional Value: ∞</p>
+
+            <button class="next-btn">Continue</button>
+        </div>
+    </section>
+
+    <!-- Ossu Museum Question -->
+    <section class="screen">
+        <div class="glass-card">
+            <h2>🌹 Ossu Museum - Question</h2>
+
+            <p>Why does Ossu keep the rose in the museum?</p>
+
+            <div class="option-group">
+                <button class="question-btn" data-answer="memory">
+                    It's too precious to lose
+                </button>
+
+                <button class="question-btn" data-answer="clutter">
+                    He's just a hoarder
+                </button>
+
+                <button class="question-btn" data-answer="both">
+                    Both, honestly
+                </button>
+            </div>
+
+            <div class="question-feedback"></div>
+
+            <button class="next-btn" disabled>Continue</button>
+        </div>
+    </section>
+
+    <!-- Evidence Locker -->
+    <section class="screen">
+        <div class="glass-card">
+
+            <img src="images/lips.jpg"
+                 class="section-image">
+
+            <h2>💋 Evidence Locker</h2>
+
+            <p>Evidence #002</p>
+
+            <p>The Legendary Lipstick Mark</p>
+
+            <br>
+
+            <p>Reason For Preservation:</p>
+
+            <p>
+                Ossu has never learned
+                how to throw things away.
+            </p>
+
+            <button class="next-btn">Continue</button>
+        </div>
+    </section>
+
+    <!-- Evidence Locker Question -->
+    <section class="screen">
+        <div class="glass-card">
+            <h2>💋 Evidence Locker - Question</h2>
+
+            <p>Is it cute or creepy that Ossu kept the lipstick mark?</p>
+
+            <div class="option-group">
+                <button class="question-btn" data-answer="cute">
+                    Aww, that's so sweet
+                </button>
+
+                <button class="question-btn" data-answer="creepy">
+                    Definitely creepy
+                </button>
+
+                <button class="question-btn" data-answer="both">
+                    Cute-creepy combo
+                </button>
+            </div>
+
+            <div class="question-feedback"></div>
+
+            <button class="next-btn" disabled>Continue</button>
+        </div>
+    </section>
+
+    <!-- Fortune Machine -->
+    <section class="screen">
+        <div class="glass-card">
+
+            <img src="images/juveria3.jpg"
+                 class="section-image">
+
+            <h2>🔮 Birthday Fortune Machine</h2>
+
+            <button id="fortuneBtn">
+                Reveal My Birthday Fortune
+            </button>
+
+            <div id="fortuneResult"></div>
+
+            <button class="next-btn">Continue</button>
+        </div>
+    </section>
+
+    <!-- Cake Challenge -->
+    <section class="screen">
+        <div class="glass-card">
+
+            <h2>🎂 Birthday Cake Challenge</h2>
+
+            <p>Tap all candles to blow them out.</p>
+
+            <div id="cake">
+                <span class="candle">🕯️</span>
+                <span class="candle">🕯️</span>
+                <span class="candle">🕯️</span>
+                <span class="candle">🕯️</span>
+                <span class="candle">🕯️</span>
+            </div>
+
+            <div id="cakeMessage"></div>
+
+            <button class="next-btn">Continue</button>
+        </div>
+    </section>
+
+    <!-- Secret Vault -->
+    <section class="screen">
+        <div class="glass-card secret-vault">
+
+            <img src="images/hands.jpg"
+                 class="vault-bg">
+
+            <div class="vault-content">
+
+                <h2>🔐 Secret Vault</h2>
+
+                <p>What does Juvi call Osama?</p>
+
+                <input
+                    type="text"
+                    id="vaultPassword"
+                    placeholder="Enter Password">
+
+                <button id="unlockVault">
+                    Unlock
+                </button>
+
+                <div id="vaultMessage"></div>
+
+            </div>
+
+            <button class="next-btn" disabled>Continue</button>
+        </div>
+    </section>
+
+    <!-- Secret Vault Question -->
+    <section class="screen">
+        <div class="glass-card">
+            <h2>🔐 Secret Vault - Question</h2>
+
+            <p>What does Juvi call Ossu besides "Ossu"?</p>
+
+            <div class="option-group">
+                <button class="question-btn" data-answer="a">
+                    A silly goose
+                </button>
+
+                <button class="question-btn" data-answer="b">
+                    The best listener
+                </button>
+
+                <button class="question-btn" data-answer="c">
+                    All of the above
+                </button>
+            </div>
+
+            <div class="question-feedback"></div>
+
+            <button class="next-btn" disabled>Continue</button>
+        </div>
+    </section>
+
+    <!-- One Wish -->
+    <section class="screen">
+        <div class="glass-card">
+
+            <h2>🌠 One Wish For Juvi</h2>
+
+            <div id="wishText"></div>
+
+            <button id="showWish">
+                Reveal Wish
+            </button>
+
+            <button class="next-btn">Continue</button>
+        </div>
+    </section>
+
+    <!-- Final Letter -->
+    <section class="screen">
+        <div class="glass-card final-letter">
+
+            <h1>❤️ Happy Birthday Juvi ❤️</h1>
+
+            <p>
+                Life has a funny way
+                of taking people on paths
+                they never expected.
+            </p>
+
+            <p>
+                And if there's one thing
+                I'm thankful for,
+            </p>
+
+            <p>
+                it's that our paths crossed.
+            </p>
+
+            <p>
+                Thank you for the memories.
+            </p>
+
+            <p>
+                Thank you for the laughs.
+            </p>
+
+            <p>
+                Thank you for staying.
+            </p>
+
+            <p>
+                I hope this year brings you:
+            </p>
+
+            <p>✨ Happiness</p>
+            <p>✨ Success</p>
+            <p>✨ Peace</p>
+            <p>✨ Good Health</p>
+
+            <p>
+                and countless reasons to smile.
+            </p>
+
+            <p>
+                You deserve all of it.
+            </p>
+
+            <p>
+                Happy Birthday.
+            </p>
+
+            <p>❤️</p>
+
+            <h3>— Ossu</h3>
+
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
